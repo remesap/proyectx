@@ -8,12 +8,12 @@ void see_M(Eigen::MatrixXf & M);
 
 int main(void)
 {
-  const int SIZE = 20;
+  const int L = 20;
   const double step = 0.1;
   const int N = 3; //iteraciones
   
   for (int ii = 0; ii*0.1 <= 1.0 ; ++ii){
-  Eigen::MatrixXf MATRIX(SIZE, SIZE);
+  Eigen::MatrixXf MATRIX(L, L);
   double p = ii*0.1;
   set_M(MATRIX, p);
   //std::cout << MATRIX << "\v" << std::endl;
