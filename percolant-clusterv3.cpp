@@ -317,8 +317,3 @@ int percolant_cluster_finder(Eigen::MatrixXi & M, int size, struct data & dat, i
   return 0;
  
 } 
-
-	    
-
-
-
