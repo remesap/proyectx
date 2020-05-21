@@ -1,6 +1,6 @@
 #include "percolant-cluster.h"
 
-int percolant_cluster_finder(Eigen::MatrixXi & M, int size)
+int percolant_cluster_finder(Eigen::MatrixXi & M, int size, struct data & dat, int n)
 {
   std::vector<int> rowlabels0{};
   std::vector<int> rowlabelsL{};
@@ -11,6 +11,7 @@ int percolant_cluster_finder(Eigen::MatrixXi & M, int size)
   std::vector<int> pcols1{};
   std::vector<int> pcols2{};
   std::vector<int> percolantes{};
+
   
   //extracción de los elementos de los extremos
   for (int j = 0; j < M.cols(); ++j)
@@ -47,7 +48,6 @@ int percolant_cluster_finder(Eigen::MatrixXi & M, int size)
 	if ( collabels0[i] == collabelsL[j] )
 	  pcols1.push_back(collabels0[i]);
       }
-
   
   //hay percolantes en las filas?
   
@@ -63,15 +63,8 @@ int percolant_cluster_finder(Eigen::MatrixXi & M, int size)
 	    prows2.push_back( prows1[j] );
 	}
       
-      for (int j = 0; j < prows2.size(); ++j)
-	std::cout << prows2[j] << " prows2 ";  //*******
-    }
+      }
   
-  else
-    std::cout << "nada de nada en las filas :'v ";
-
-  std::cout << "\n\v";
-  //hay percolantes en las columnas?
   
   if ( pcols1.size() > 0)
     {
@@ -85,17 +78,10 @@ int percolant_cluster_finder(Eigen::MatrixXi & M, int size)
 	    pcols2.push_back( pcols1[j] );
 	}
       
-      for (int j = 0; j < pcols2.size(); ++j)
-	std::cout << pcols2[j] << "  pcols2";
-    }
-  
-  else
-    std::cout << "nada de nada en las columnas :'v ";
-
+      }
   
   if ( prows2.size() > 0 || pcols2.size() > 0)
     {
-      //hasta el momento tenemos los vectores prows2 y pcols2, los vamos a fusionar en el vector percolantes:
       prows2.insert( prows2.end(), pcols2.begin(), pcols2.end() );
       percolantes.push_back( prows2[0] );
       
@@ -104,47 +90,34 @@ int percolant_cluster_finder(Eigen::MatrixXi & M, int size)
 	  if ( prows2[i] != percolantes.back()) 
 	    percolantes.push_back( prows2[i] );
 	}
-      
-      std::cout << "\n\vlos cluster percolantes son: \n\v";
-      
-      for (int j = 0; j < percolantes.size(); ++j)
-	std::cout << percolantes[j] << "  ";
-      
-      std::cout << "\n\v";
     }
-
-  
+    
   std::vector<int> sizep{};
   for (int j = 0; j < percolantes.size(); ++j)
-    sizep.push_back(0);
-  
+    sizep.push_back(0);  
 
+  int cont = 0;
   for (int i = 0; i < M.cols(); ++i)
     for (int j = 0; j < M.cols(); ++j)
       {
 	if (M(i, j) != 0)
 	  {
-	    for ( int n = 0; n < percolantes.size() ; ++n)
-	      if ( M(i, j) == percolantes[n] )
-		{
-		  sizep[n]++;
-		}
+	  for ( int n = 0; n < percolantes.size() ; ++n)
+	    if ( M(i, j) == percolantes[n] )
+	      {
+		sizep[n]++;
+	      }
 	  }
       }
   
-  std::cout << "Tamaño: \n";
-  
-  for (int i = 0; i < sizep.size(); ++i)
-    std::cout << sizep[i] << std::endl;
-  
+  if(percolantes.size() != 0)
+    {
+      dat.totalclusters++;
+    }
+
+  if (sizep.size() > 0)
+    dat.maxsize[n] = sizep[0];
+			      
   return 0;
-
-
-}
-
-	   
-
-	    
-
-
-
+ 
+} 

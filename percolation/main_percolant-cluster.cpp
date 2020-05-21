@@ -1,19 +1,28 @@
 #include "percolant-cluster.h"
 
+data datos { 0,
+	     {0},
+};
+
 int main(void)
 {
-  const int L = 1000;
-  double p = 0.8;
-  Eigen::MatrixXi MATRIX(L, L);
-  for(int u = 0; u < 20; ++u)
-    {
-      set_M(MATRIX, p, u);
-      initialize(L*L/2);
-      std::cout << "Número de clusters:" << cluster_finder(MATRIX, L) << std::endl;
-      percolant_cluster_finder(MATRIX, L);
-    }
-
-  MATRIX.resize(0,0);
-  
+  int SIZES[5] = {32,64,128,256,512};
+  for(int v = 0; v < 5; v++)
+      {
+	int L = SIZES[v];
+	std::cout << L << "\n\v";
+	for(double p = 0.57; p < 0.65; p = p + 0.00125)
+	  {
+	    Matrix(L, p, datos);
+	    std::cout << p << "\t";
+	    std::cout << Probabilidad(L, p, datos) << "\t";
+	    int* i1;
+	    i1 = std::max_element(datos.maxsize + 0, datos.maxsize + 19);
+	    std::cout << (*i1*(1.0)/(L*L))*100 << std::endl;
+	    datos.totalclusters = 0;
+	    for(int u = 0; u < 20; u++){
+	      datos.maxsize[u] = 0;}	    
+	 }
+      }
   return 0;
 }

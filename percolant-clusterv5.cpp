@@ -43,7 +43,7 @@ int main(void)
 	    std::cout << Probabilidad(L,p) << "\t";
 	    int* i1;
 	    i1 = std::max_element(datos.maxsize + 0, datos.maxsize + 19);
-	    std::cout << (datos.maxsize[*i1]*(1.0)/(L*L))*100 << std::endl;
+	    std::cout << (*i1*(1.0)/(L*L))*100 << std::endl;
 	    datos.totalclusters = 0;
 	    for(int u = 0; u < 20; u++){
 	      datos.maxsize[u] = 0;}	    
