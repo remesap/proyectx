@@ -2,6 +2,7 @@
 #include <random>
 #include <Eigen/Dense>
 #include <vector>
+#include <fstream>
 
 extern std::vector<int> labels;
 extern int n_labels;
@@ -23,3 +24,4 @@ int Union(int x, int y);
 int percolant_cluster_finder(Eigen::MatrixXi & M, int size, struct data & dat, int n);
 int Matrix(int L, double p, struct data & dat);
 double Probabilidad(int L, double p, struct data & dat);
+void print_txt ( int n, std::vector <double> & V1, std::vector <double> & V2, std::vector <double> & V3 );

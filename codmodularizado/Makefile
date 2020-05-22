@@ -1,11 +1,19 @@
-all : main_percolant-cluster.x
+CXX = g++
+CXXFLAGS = -O3 -std=c++11 -fsanitize=undefined -fsanitize=signed-integer-overflow -fsanitize=address -g
 
-main_percolant-cluster.x : set_M.o cluster_finder.o initialize.o set_labels.o Find.o Union.o percolant_cluster_finder.o main_percolant-cluster.o Matrix.o Probabilidad.o
+all : main_percolant-cluster.x run1 plot
 
-	g++ -std=c++17 -fsanitize=address -g $^ -o $@
+main_percolant-cluster.x : set_M.o cluster_finder.o initialize.o set_labels.o Find.o Union.o percolant_cluster_finder.o main_percolant-cluster.o Matrix.o Probabilidad.o print_txt.o
+	$(CXX)  $(CXXFLAGS) $^ -o $@
 
-%.o : %.cpp   #de todos los archivos .cpp se crean los objetos .o 
-	g++ -c $< # "$<" indica que hay una única dependencia
+%.o : %.cpp   #de todos los archivos .cpp se crean los objetos .o  $< indica que hay una sola dependencia
+	g++ -c $< 
+
+run1 : main_percolant-cluster.x
+	time ./$<
+
+plot :
+	gnuplot plot.gp
 
 clean :
-	rm *~ *# *.o *.x
+	rm *~ *# *.o *.x *.txt *.pdf
