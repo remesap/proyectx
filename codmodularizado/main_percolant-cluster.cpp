@@ -1,7 +1,7 @@
 #include "percolant-cluster.h"
 
-data datos { 0,
-	     {0},
+data datos { 0, //totalclusters
+	     {0}, //maxsize
 };
 
 int main(void)
