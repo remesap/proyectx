@@ -17,7 +17,7 @@ int main(void)
       std::vector<double> PROBS{};
       std::vector<double> maxsz{};
       
-      for(double p = 0.57; p < 0.65; p = p + 0.00125)
+      for(double p = 0.54; p < 0.66; p = p + 0.00125)
 	{
 	  
 	  Matrix(L, p, datos);  //genera 20 matrices y saca los datos

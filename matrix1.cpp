@@ -11,12 +11,13 @@ int main(void)
   const double step = 0.1;
   const int N = 3; //iteraciones
   
-  for (int ii = 0; ii*0.1 <= 1.0 ; ++ii){
+  //for (int ii = 0; ii*0.1 <= 1.0 ; ++ii){
   Eigen::MatrixXf MATRIX(L, L);
-  double p = ii*0.1;
+  //double p = ii*0.1;
+  double p = 0.4;
   set_M(MATRIX, p);
   std::cout << MATRIX << "\v" << std::endl;
-  }
+  //}
   return 0;
 }
 

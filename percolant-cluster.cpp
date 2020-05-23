@@ -31,19 +31,30 @@ data datos { 0,
 
 int main(void)
 {
-  const int L = 500;
-  double p = 0.8;
-  for(double p = 0.55; p < 0.65; p = p + 0.005)
+  
+  const int L = 128;
+  double p = 0.579;
+  /*for(double p = 0.55; p < 0.65; p = p + 0.005)
    {
      Matrix(L,p);
-     std::cout << p << " " <<  Probabilidad(L,p) << std::endl;
+      std::cout << p << " " <<  Probabilidad(L,p) << std::endl;
      int* i1;
      i1 = std::max_element(datos.maxsize + 0, datos.maxsize + 19);
      std::cout << "maxsize" << *i1*1.0/(L*L) << std::endl;
      datos.totalclusters = 0;
    }
-  // std::cout << Probabilidad(L,p) << std::endl;
+   std::cout << Probabilidad(L,p) << std::endl;*/
+
+  Eigen::MatrixXi MATRIX(L, L);
+  set_M(MATRIX, p, 1);
+  initialize(L*L/2);
+  //cluster_finder(MATRIX, L);
+  std::cout << MATRIX << std::endl;
+  percolant_cluster_finder(MATRIX,L ,datos, 1);
+  //std::cout << MATRIX << std::endl;
   return 0;
+
+  
 }
 
 int Matrix(int L, double p)

@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O3 -std=c++11 -fsanitize=undefined -fsanitize=signed-integer-overflow -fsanitize=address -g
+CXXFLAGS = -O3 -std=c++11 -fsanitize=undefined -fsanitize=address -g
 
 all : main_percolant-cluster.x run1 plot
 
